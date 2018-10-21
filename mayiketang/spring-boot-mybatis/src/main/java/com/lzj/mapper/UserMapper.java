@@ -24,6 +24,9 @@ public interface UserMapper {
 	@Select("select * from tbUser where name=#{name}")
 	public List<User> findUsersByName(@Param("name") String name);
 	
+	@Select("select * from tbUser where id=#{id}")
+	public List<User> findUsersById(@Param("id") Integer id);
+	
 	@Insert("insert into tbUser(name, age) values(#{name},#{age})")
 	public int addUser(@Param("name") String name, @Param("age") Integer age);
 }
