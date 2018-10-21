@@ -18,6 +18,9 @@ import com.lzj.entities.User;
 @Mapper
 public interface UserMapper {
 	
+	@Select("select * from tbUser")
+	public List<User> list();
+	
 	@Select("select * from tbUser where name=#{name}")
 	public List<User> findUsersByName(@Param("name") String name);
 	
