@@ -21,7 +21,11 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserMapper userMapper;
 	
-	
+	@Override
+	public List<User> list() {
+		return userMapper.list();
+	}
+
 	@Override
 	public List<User> findUsersByName(String name) {
 		return userMapper.findUsersByName(name);

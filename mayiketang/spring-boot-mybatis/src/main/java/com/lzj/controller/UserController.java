@@ -24,6 +24,12 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping("/list")
+	@ResponseBody
+	public List<User> list() {
+		return userService.list();
+	}
 
 	@RequestMapping("/findUsersByName/{name}")
 	@ResponseBody
