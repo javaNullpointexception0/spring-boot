@@ -1,0 +1,2 @@
+#指定加载自动配置类
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.lzj.spring.boot.autoconfigure.StudentAutoconfigure

@@ -1,0 +1,27 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.lzj.spring.boot.autoconfigure.StudentProperties",
+      "name": "student",
+      "type": "com.lzj.spring.boot.autoconfigure.StudentProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.lzj.spring.boot.autoconfigure.StudentProperties",
+      "name": "student.age",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "com.lzj.spring.boot.autoconfigure.StudentProperties",
+      "name": "student.name",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.lzj.spring.boot.autoconfigure.StudentProperties",
+      "name": "student.sex",
+      "type": "java.lang.String"
+    }
+  ]
+}
