@@ -1,0 +1,15 @@
+server:
+  port: 8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #暴露所有端点，统一配置
+    enabled-by-default: true  #默认启用所有端点，如果不配置该项，则需要针对非默认启用的端点进行启用
+    jmx:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      enabled: true
+      show-details: always  #展示健康检查的详细信息
