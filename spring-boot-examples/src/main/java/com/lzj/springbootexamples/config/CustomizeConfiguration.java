@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CustomConfiguration {
+public class CustomizeConfiguration {
 
     @Bean(value = "user", initMethod = "init")
     public User initUser() {

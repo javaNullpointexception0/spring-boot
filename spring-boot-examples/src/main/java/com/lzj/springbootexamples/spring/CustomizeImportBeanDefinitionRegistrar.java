@@ -6,12 +6,12 @@ import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.type.AnnotationMetadata;
 
-public class CustomImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
+public class CustomizeImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-        GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
+        /*GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
         beanDefinition.setBeanClass(User.class);
-        registry.registerBeanDefinition("user", beanDefinition);
+        registry.registerBeanDefinition("user", beanDefinition);*/
     }
 }

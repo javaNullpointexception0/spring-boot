@@ -1,6 +1,4 @@
 package com.lzj.springbootexamples.spring;
-import com.lzj.springbootexamples.config.CustomConfiguration;
-import com.lzj.springbootexamples.utils.SpringUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;

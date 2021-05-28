@@ -9,7 +9,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
+public class CustomizeBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
         BeanDefinition beanDefinition = beanFactory.getBeanDefinition("user");
