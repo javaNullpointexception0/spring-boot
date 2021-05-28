@@ -7,7 +7,16 @@ import lombok.Setter;
 @Setter
 public class User {
 
+    public User() {
+        System.out.println("User 构造函数执行...");
+    }
+
+
     private String name;
     private Integer age;
     private String gender = "male";
+
+    public void init() {
+        System.out.println("User 初始化函数执行...");
+    }
 }

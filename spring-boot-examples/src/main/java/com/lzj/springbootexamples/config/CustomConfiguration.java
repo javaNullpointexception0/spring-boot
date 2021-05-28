@@ -1,16 +1,17 @@
 package com.lzj.springbootexamples.config;
 
-import com.lzj.springbootexamples.spring.CustomImportBeanDefinitionRegistrar;
+import com.lzj.springbootexamples.entity.User;
+import com.lzj.springbootexamples.utils.SpringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import(CustomImportBeanDefinitionRegistrar.class)
 public class CustomConfiguration {
 
-
-    /*@Bean("user")
+    @Bean(value = "user", initMethod = "init")
     public User initUser() {
         return new User();
-    }*/
+    }
 }

@@ -26,11 +26,11 @@ public class CustomizeBeanPostProcessor implements BeanPostProcessor {
             return bean;
         }
         System.out.println("Bean[" + bean.getClass().getName() + "]初始化方法执行前的处理逻辑...");
-        if (bean instanceof CustomConfiguration) {
+        /*if (bean instanceof CustomConfiguration) {
             Integer serverPort = ((CustomConfiguration)bean).serverPort;
             SpringUtil springUtil = ((CustomConfiguration)bean).SpringUtil;
             System.out.println("@Value配置值：" + serverPort + ";autowired注入：" + springUtil);
-        }
+        }*/
         return bean;
     }
 
