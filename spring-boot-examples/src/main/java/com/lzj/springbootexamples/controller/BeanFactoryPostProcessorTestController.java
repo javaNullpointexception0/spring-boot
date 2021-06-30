@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/bfpptc")
 public class BeanFactoryPostProcessorTestController {
 
+    @Value("${server.port}")
+    private Integer serverPort;
+
     @RequestMapping("/createUser")
     public User createUser() {
         return new User();
