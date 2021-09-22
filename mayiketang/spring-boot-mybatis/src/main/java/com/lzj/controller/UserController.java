@@ -1,6 +1,7 @@
 package com.lzj.controller;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,12 @@ public class UserController {
 	@RequestMapping("/findUsersByName/{name}")
 	@ResponseBody
 	public List<User> findUsersByName(@PathVariable("name") String name) {
+		try {
+			System.out.println(System.currentTimeMillis());
+			Thread.sleep(60 * 60 * 1000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		return userService.findUsersByName(name);
 	}
 
