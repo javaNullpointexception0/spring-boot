@@ -11,9 +11,11 @@ import com.lzj.entities.User;
  */
 public interface UserService {
 
-	public List<User> list();
+	List<User> list();
 	
-	public List<User> findUsersByName(String name);
+	List<User> findUsersByName(String name);
 	
-	public int addUser(String name, Integer age);
+	int addUser(String name, Integer age);
+
+	int updateUser(Integer id, String name, Integer age);
 }

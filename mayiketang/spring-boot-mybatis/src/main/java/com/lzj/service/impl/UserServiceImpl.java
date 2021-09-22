@@ -2,6 +2,7 @@ package com.lzj.service.impl;
 
 import java.util.List;
 
+import com.lzj.exception.OptimisticLockerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,12 +32,43 @@ public class UserServiceImpl implements UserService{
 		return userMapper.findUsersByName(name);
 	}
 
-	@Transactional  //开启事务
+	/**
+	 * 新增用户
+	 * @param name
+	 * @param age
+	 * @return
+	 */
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int addUser(String name, Integer age) {
-		return userMapper.addUser(name, age);
+		User user = new User();
+		user.setName(name);
+		user.setAge(age);
+		return userMapper.insert(user);
 	}
+	/**
+	 * 更新用户
+	 * @param id
+	 * @param name
+	 * @param age
+	 * @return
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateUser(Integer id, String name, Integer age) {
+		//先查询，获取到版本号
+		User dbUser = userMapper.selectById(id);
+		User user = new User();
+		user.setId(id);
+		user.setName(name);
+		user.setAge(age);
+		//设置版本号
+		user.setVersion(dbUser.getVersion());
 
-	
-
+		int updateCount = userMapper.updateById(user);
+		if (updateCount <= 0) {
+			throw new OptimisticLockerException("乐观锁检测到数据冲突，数据更新条数：" + updateCount);
+		}
+		return updateCount;
+	}
 }

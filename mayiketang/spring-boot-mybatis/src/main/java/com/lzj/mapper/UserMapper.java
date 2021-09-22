@@ -2,10 +2,8 @@ package com.lzj.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.*;
 
 import com.lzj.entities.User;
 
@@ -16,17 +14,14 @@ import com.lzj.entities.User;
  * 描述：
  */
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
 	
 	@Select("select * from tbUser")
-	public List<User> list();
+	List<User> list();
 	
 	@Select("select * from tbUser where name=#{name}")
-	public List<User> findUsersByName(@Param("name") String name);
-	
-	@Select("select * from tbUser where id=#{id}")
-	public List<User> findUsersById(@Param("id") Integer id);
-	
-	@Insert("insert into tbUser(name, age) values(#{name},#{age})")
-	public int addUser(@Param("name") String name, @Param("age") Integer age);
+	List<User> findUsersByName(@Param("name") String name);
+
+	@Update("update tbUser set name=#{name}, age=#{age}, version=version+1 where id=#{id} and version=#{version}")
+	int updateByIdInSql(User user);
 }

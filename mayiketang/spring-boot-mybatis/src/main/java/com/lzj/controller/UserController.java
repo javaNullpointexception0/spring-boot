@@ -49,4 +49,42 @@ public class UserController {
 		int flg = userService.addUser(name, age);
 		return flg + "";
 	}
+
+	@RequestMapping("/updateUser/{id}/{name}/{age}")
+	public String updateUser(@PathVariable("id") Integer id, @PathVariable("name") String name,
+							 @PathVariable("age") Integer age) {
+		return userService.updateUser(id, name, age) + "";
+	}
+
+	@RequestMapping("/updateUserInThread/{id}/{name}/{age}")
+	public String updateUserInThread(@PathVariable("id") Integer id, @PathVariable("name") String name,
+							 @PathVariable("age") Integer age) throws InterruptedException {
+		AtomicInteger failTime = new AtomicInteger(0);
+		AtomicInteger successTime = new AtomicInteger(0);
+		Thread thread1 = startTask(id, name, age, failTime, successTime);
+		Thread thread2 = startTask(id, name, age, failTime, successTime);
+		thread1.join();
+		thread2.join();
+		System.out.println("成功次数：" + successTime.get() + "，失败次数：" + failTime.get());
+		return "并发测试完成";
+	}
+
+	private Thread startTask(Integer id, String name, Integer age, AtomicInteger failTime, AtomicInteger successTime) {
+		long endTime = System.currentTimeMillis() + 5000L;
+		Thread thread = new Thread(() -> {
+			while (true) {
+				if (System.currentTimeMillis() - endTime > 0) {
+					break;
+				}
+				try {
+					int flg = userService.updateUser(id, name, age);
+					successTime.incrementAndGet();
+				} catch (Exception e) {
+					failTime.incrementAndGet();
+				}
+			}
+		});
+		thread.start();
+		return thread;
+	}
 }
