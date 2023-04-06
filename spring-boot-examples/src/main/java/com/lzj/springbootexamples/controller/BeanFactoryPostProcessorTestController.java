@@ -1,7 +1,8 @@
 package com.lzj.springbootexamples.controller;
 
 import com.lzj.springbootexamples.entity.User;
-import com.lzj.springbootexamples.utils.SpringUtil;
+import com.lzj.springbootexamples.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,9 @@ public class BeanFactoryPostProcessorTestController {
     @Value("${server.port}")
     private Integer serverPort;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/createUser")
     public User createUser() {
         return new User();
@@ -20,6 +24,6 @@ public class BeanFactoryPostProcessorTestController {
 
     @RequestMapping("/getUser")
     public User getUser() {
-        return (User) SpringUtil.getBean("user");
+        return userService.getUser();
     }
 }

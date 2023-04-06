@@ -1,8 +1,16 @@
 package com.lzj.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.lzj.config.AppConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +32,9 @@ import com.lzj.service.UserService;
 public class UserController {
 
 	@Autowired
+	private com.lzj.config.AppConfig appConfig;
+
+	@Autowired
 	private UserService userService;
 	
 	@RequestMapping("/list")
@@ -32,15 +43,43 @@ public class UserController {
 		return userService.list();
 	}
 
+	@RequestMapping("/now")
+	@ResponseBody
+	public Long now() {
+		return System.currentTimeMillis();
+	}
+
+	@RequestMapping("/start")
+	public String start() throws Exception {
+		Thread thread = new Thread(() -> {
+			try {
+				URL url = new URL("http://192.168.6.128:8081/user/list");
+				System.out.println("开始时间：" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+				URLConnection urlConnection = url.openConnection();
+				urlConnection.setConnectTimeout(appConfig.getConnectionTimeout());
+				urlConnection.setReadTimeout(5000);
+				InputStream inputStream = urlConnection.getInputStream();
+				if (inputStream.available() > 0) {
+					byte[] bytes = new byte[inputStream.available()];
+					inputStream.read(bytes);
+					System.out.println(new String(bytes));
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("结束时间：" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+			System.out.println("请求完成");
+		});
+		thread.setDaemon(true);
+		thread.start();
+		Thread.sleep(500);
+		System.out.println("返回结果");
+		return "请求完成";
+	}
+
 	@RequestMapping("/findUsersByName/{name}")
 	@ResponseBody
 	public List<User> findUsersByName(@PathVariable("name") String name) {
-		try {
-			System.out.println(System.currentTimeMillis());
-			Thread.sleep(60 * 60 * 1000L);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		return userService.findUsersByName(name);
 	}
 

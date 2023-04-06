@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: apollo-demo
+
+#Apollo配置
+app:
+  id: 808 #需要与Apollo管理页面上配置的项目的AppId一致
+apollo:
+  cluster: default #指定使用哪个集群的配置，默认default
+  meta: http://192.168.6.128:8080 #DEV环境配置中心地址
+  autoUpdateInjectedSpringProperties: true #是否开启spring参数自动更新
+  bootstrap:
+      enabled: true #是否开启Apollo 如果在主类通过@EnableApolloConfig注解启用apollo，则该配置不生效
+      namespaces: application #设置namespace，默认application，如果在主类通过@EnableApolloConfig注解启用apollo，此配置不生效，此时通过注解的value指定
+      eagerLoad:
+        enabled: false #将Apollo加载提到初始化日志系统之前
