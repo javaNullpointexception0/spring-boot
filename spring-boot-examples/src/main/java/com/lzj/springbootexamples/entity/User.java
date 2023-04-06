@@ -19,4 +19,8 @@ public class User {
     public void init() {
         System.out.println("User 初始化函数执行...");
     }
+
+    public void otherInit() {
+        System.out.println("User 初始化函数otherInit()执行...");
+    }
 }

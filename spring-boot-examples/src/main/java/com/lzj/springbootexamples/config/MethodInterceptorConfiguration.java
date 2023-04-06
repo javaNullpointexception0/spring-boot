@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * 配置类，负责装配类初始化
  */
-@Configuration
+//@Configuration
 public class MethodInterceptorConfiguration {
 
     @Bean

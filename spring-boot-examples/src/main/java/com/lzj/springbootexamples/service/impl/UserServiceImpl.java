@@ -10,6 +10,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser() {
-        return (User)SpringUtil.getBean("user");
+        User user = (User)SpringUtil.getBean("user");
+        System.out.println("name：" + user.getName());
+        return user;
     }
 }
