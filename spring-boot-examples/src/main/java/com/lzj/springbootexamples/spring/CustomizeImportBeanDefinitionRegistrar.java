@@ -10,8 +10,8 @@ public class CustomizeImportBeanDefinitionRegistrar implements ImportBeanDefinit
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
-        /*GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
+        GenericBeanDefinition beanDefinition = new GenericBeanDefinition();
         beanDefinition.setBeanClass(User.class);
-        registry.registerBeanDefinition("user", beanDefinition);*/
+        registry.registerBeanDefinition("user", beanDefinition);
     }
 }

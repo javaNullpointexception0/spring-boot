@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @date 2021/5/28 14:09
  * @description Bean初始化方法调用前的前后置处理器
  */
-@Component
+//@Component
 public class CustomizeBeanPostProcessor implements BeanPostProcessor {
 
     private static final String PACKAGE_PREFIX = "com.lzj";
